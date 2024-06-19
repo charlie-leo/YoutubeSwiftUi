@@ -11,33 +11,64 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
-                    HomeView()
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Home")
-                        }
-                    
-                    SearchView()
-                        .tabItem {
-                            Image(systemName: "magnifyingglass")
-                            Text("Search")
-                        }
-                    
-                    ProfileView()
-                        .tabItem {
-                            Image(systemName: "person.fill")
-                            Text("Profile")
-                        }
+            NavigationView {
+                         HomeView()
+                     }
+                     .tabItem {
+                         Image(systemName: "house.fill")
+                         Text("Home")
+                     }
+                     
+                     NavigationView {
+                         SearchView()
+                     }
+                     .tabItem {
+                         Image(systemName: "magnifyingglass")
+                         Text("Search")
+                     }
+                     
+                     NavigationView {
+                         ProfileView()
+                     }
+                     .tabItem {
+                         Image(systemName: "person.fill")
+                         Text("Profile")
+                     }
                 }
         
     }
 }
+
+//struct HomeView: View {
+//    var body: some View {
+//        Text("Home View")
+//            .font(.largeTitle)
+//            .foregroundColor(.blue)
+//    }
+//}
+//
+//struct SearchView: View {
+//    var body: some View {
+//        Text("Search View")
+//            .font(.largeTitle)
+//            .foregroundColor(.green)
+//    }
+//}
+//
+//struct ProfileView: View {
+//    var body: some View {
+//        Text("Profile View")
+//            .font(.largeTitle)
+//            .foregroundColor(.purple)
+//    }
+//}
 
 struct HomeView: View {
     var body: some View {
         Text("Home View")
             .font(.largeTitle)
             .foregroundColor(.blue)
+            .navigationTitle("Home")
     }
 }
 
@@ -46,6 +77,7 @@ struct SearchView: View {
         Text("Search View")
             .font(.largeTitle)
             .foregroundColor(.green)
+            .navigationTitle("Search")
     }
 }
 
@@ -54,9 +86,9 @@ struct ProfileView: View {
         Text("Profile View")
             .font(.largeTitle)
             .foregroundColor(.purple)
+            .navigationTitle("Profile")
     }
 }
-
 
 
 struct ContentView_Previews: PreviewProvider {
