@@ -8,87 +8,104 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedTap = 0
+    
     var body: some View {
         
-        TabView {
-            NavigationView {
-                         HomeView()
-                     }
-                     .tabItem {
-                         Image(systemName: "house.fill")
-                         Text("Home")
-                     }
-                     
-                     NavigationView {
-                         SearchView()
-                     }
-                     .tabItem {
-                         Image(systemName: "magnifyingglass")
-                         Text("Search")
-                     }
-                     
-                     NavigationView {
-                         ProfileView()
-                     }
-                     .tabItem {
-                         Image(systemName: "person.fill")
-                         Text("Profile")
-                     }
+        VStack {
+            TabView (selection: $selectedTap) {
+                
+                NavigationView {
+                    VStack{
+                        Text("HomeView")
+                            .font(.largeTitle)
+                            .foregroundColor(.green)
+                        
+                    }
+                    .navigationTitle("HomeView")
                 }
+                .tag(0)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+                
+                
+                VStack{
+                    Text("Search")
+                    .font(.largeTitle)
+                    .foregroundColor(.cyan)
+                }
+                .tag(1)
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
+                
+                VStack{
+                    Text("Profile")
+                    .font(.largeTitle)
+                    .foregroundColor(.accentColor)
+                }
+                .tag(2)
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Profile")
+                }
+                
+                
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            HStack {
+                Spacer()
+                Button(action: {
+                    selectedTap = 0
+                }, label: {
+                    VStack {
+                        Image(systemName: "house.fill")
+                        if selectedTap == 0 {
+                            Text("Home")
+                        }
+                    }
+                })
+                Spacer()
+                Button(action: {
+                    selectedTap = 1
+                }, label: {
+                    VStack {
+                        Image(systemName: "magnifyingglass")
+                        if selectedTap == 1 {
+                            Text("Search")
+                        }
+                        
+                    }
+                })
+                Spacer()
+                Button(action: {
+                    selectedTap = 2
+                }, label: {
+                    VStack {
+                        Image(systemName: "person.fill")
+                        if selectedTap == 2 {
+                            Text("Profile")
+                        }
+                    }
+                })
+                Spacer()
+            }
+            .padding()
+            .background(Color(UIColor.systemGray6))
+            
+            
+            
+        }
         
     }
 }
 
-//struct HomeView: View {
-//    var body: some View {
-//        Text("Home View")
-//            .font(.largeTitle)
-//            .foregroundColor(.blue)
-//    }
-//}
-//
-//struct SearchView: View {
-//    var body: some View {
-//        Text("Search View")
-//            .font(.largeTitle)
-//            .foregroundColor(.green)
-//    }
-//}
-//
-//struct ProfileView: View {
-//    var body: some View {
-//        Text("Profile View")
-//            .font(.largeTitle)
-//            .foregroundColor(.purple)
-//    }
-//}
 
-struct HomeView: View {
-    var body: some View {
-        Text("Home View")
-            .font(.largeTitle)
-            .foregroundColor(.blue)
-            .navigationTitle("Home")
-    }
-}
-
-struct SearchView: View {
-    var body: some View {
-        Text("Search View")
-            .font(.largeTitle)
-            .foregroundColor(.green)
-            .navigationTitle("Search")
-    }
-}
-
-struct ProfileView: View {
-    var body: some View {
-        Text("Profile View")
-            .font(.largeTitle)
-            .foregroundColor(.purple)
-            .navigationTitle("Profile")
-    }
-}
 
 
 struct ContentView_Previews: PreviewProvider {
