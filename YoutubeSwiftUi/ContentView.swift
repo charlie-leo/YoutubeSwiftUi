@@ -10,20 +10,16 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var selectedTap = 0
+    @Namespace private var animationNameSpace
     
     var body: some View {
         
         VStack {
             TabView (selection: $selectedTap) {
                 
-//                VStack{
-                    HomeView()
-//                }
+                HomeView()
                 .tag(0)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
+            
                 
                 
                 VStack{
@@ -32,10 +28,7 @@ struct ContentView: View {
                     .foregroundColor(.cyan)
                 }
                 .tag(1)
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
+                
                 
                 VStack{
                     Text("Profile")
@@ -43,10 +36,7 @@ struct ContentView: View {
                     .foregroundColor(.accentColor)
                 }
                 .tag(2)
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
+               
                 
                 
             }
@@ -54,43 +44,13 @@ struct ContentView: View {
             
             HStack {
                 Spacer()
-                Button(action: {
-                    selectedTap = 0
-                }, label: {
-                    VStack {
-                        let itemColor : Color = (selectedTap == 0) ? Color.white : Color.gray
-                        
-                        Image(systemName: "house.fill").tint(itemColor)
-                        Text("Home").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Home", tab: 0, icon: "house.fill")
                 Spacer()
                 Spacer()
-                Button(action: {
-                    selectedTap = 1
-                }, label: {
-                    VStack {
-                        var itemColor : Color = (selectedTap == 1) ? Color.white : Color.gray
-                        
-                        Image(systemName: "magnifyingglass").tint(itemColor)
-                        Text("Search").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Search", tab: 1, icon: "magnifyingglass")
                 Spacer()
                 Spacer()
-                Button(action: {
-                    selectedTap = 2
-                }, label: {
-                    VStack {
-                        var itemColor : Color = (selectedTap == 2) ? Color.white : Color.gray
-                        
-                        Image(systemName: "person.fill").tint(itemColor)
-                        Text("Profile").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Profile", tab: 2, icon: "person.fill")
                 Spacer()
             }
             .padding()
@@ -109,6 +69,36 @@ struct ContentView: View {
         }
         
     }
+    
+    
+    @ViewBuilder
+    private func TabCustomItem(
+        _ text : String,
+        tab : Int,
+        icon : String
+    ) -> some View {
+        VStack{
+            ZStack{
+                if selectedTap == tab {
+                    Color.gray
+                        .frame(width: 40, height: 40)
+                        .background(Circle())
+                        .clipShape(.ellipse)
+                        .matchedGeometryEffect(id: "backgroung", in: animationNameSpace)
+                }
+                Image(systemName: icon)
+                    .frame(width: 40, height: 40)
+            }
+            Text(text)
+        }
+        .onTapGesture {
+            withAnimation(.spring){
+                selectedTap = tab
+            }
+        }
+    }
+    
+    
 }
 
 
