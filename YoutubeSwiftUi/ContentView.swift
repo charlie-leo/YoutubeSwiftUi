@@ -9,106 +9,100 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var selectedTap = 0
+    @State private var selectedTab = 0
+    @Namespace private var animationNamespace
+    
     
     var body: some View {
         
         VStack {
-            TabView (selection: $selectedTap) {
+            TabView (selection: $selectedTab) {
                 
-//                VStack{
-                    HomeView()
-//                }
-                .tag(0)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-                
-                
+                HomeView()
+                    .tag(0)
+//                    .tabItem {
+//                        
+//                    }
                 VStack{
                     Text("Search")
-                    .font(.largeTitle)
-                    .foregroundColor(.cyan)
+                        .font(.largeTitle)
+                        .foregroundColor(.cyan)
                 }
                 .tag(1)
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
+//                .tabItem {
+//                    
+//                }
                 
                 VStack{
                     Text("Profile")
-                    .font(.largeTitle)
-                    .foregroundColor(.accentColor)
+                        .font(.largeTitle)
+                        .foregroundColor(.accentColor)
                 }
                 .tag(2)
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
-                
-                
+//                .tabItem {
+//                    
+//                }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//            .onChange(of: selectedTab) { _ in
+//                withAnimation {
+//                    
+//                }
+//            }
             
             HStack {
+                
                 Spacer()
-                Button(action: {
-                    selectedTap = 0
-                }, label: {
-                    VStack {
-                        let itemColor : Color = (selectedTap == 0) ? Color.white : Color.gray
-                        
-                        Image(systemName: "house.fill").tint(itemColor)
-                        Text("Home").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Home", tab: 0, icon: "house.fill")
                 Spacer()
                 Spacer()
-                Button(action: {
-                    selectedTap = 1
-                }, label: {
-                    VStack {
-                        var itemColor : Color = (selectedTap == 1) ? Color.white : Color.gray
-                        
-                        Image(systemName: "magnifyingglass").tint(itemColor)
-                        Text("Search").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Search", tab: 1, icon: "magnifyingglass")
                 Spacer()
                 Spacer()
-                Button(action: {
-                    selectedTap = 2
-                }, label: {
-                    VStack {
-                        var itemColor : Color = (selectedTap == 2) ? Color.white : Color.gray
-                        
-                        Image(systemName: "person.fill").tint(itemColor)
-                        Text("Profile").foregroundColor(itemColor)
-                        
-                    }
-                })
+                TabCustomItem("Profile", tab: 2, icon: "person.fill")
                 Spacer()
             }
             .padding()
             .background(Color(UIColor.black))
             .cornerRadius(10.0)
             .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-            
             .shadow(radius: 10)
             .onAppear{
             }
-//            .background(Color(UIColor.systemGray6))
-//            .cornerRadius(10.0)
+//            .onChange(of: selectedTab){ _ in
+//                withAnimation(.spring){
+//                    
+//                }
+//            }
             
-            
-            
+        }
+    }
+    
+    @ViewBuilder
+    private func TabCustomItem(_ text: String, tab: Int, icon: String ) -> some View {
+        VStack{
+            ZStack{
+                if selectedTab == tab {
+                    Color.gray
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.blue)
+                        .background(RoundedRectangle(cornerRadius: 20))
+                        .clipShape(.ellipse)
+                        .matchedGeometryEffect(id: "background", in: animationNamespace)
+                }
+                Image(systemName: icon)
+                    .frame(width: 40, height: 40)
+            }
+            Text(text)
+        }
+        .onTapGesture {
+            withAnimation(.spring){
+                selectedTab = tab
+            }
         }
         
     }
+    
 }
 
 
