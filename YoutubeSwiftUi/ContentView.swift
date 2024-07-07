@@ -16,15 +16,9 @@ struct ContentView: View {
         VStack {
             TabView (selection: $selectedTap) {
                 
-                NavigationView {
-                    VStack{
-                        Text("HomeView")
-                            .font(.largeTitle)
-                            .foregroundColor(.green)
-                        
-                    }
-                    .navigationTitle("HomeView")
-                }
+//                VStack{
+                    HomeView()
+//                }
                 .tag(0)
                 .tabItem {
                     Image(systemName: "house.fill")
@@ -64,39 +58,51 @@ struct ContentView: View {
                     selectedTap = 0
                 }, label: {
                     VStack {
-                        Image(systemName: "house.fill")
-                        if selectedTap == 0 {
-                            Text("Home")
-                        }
+                        let itemColor : Color = (selectedTap == 0) ? Color.white : Color.gray
+                        
+                        Image(systemName: "house.fill").tint(itemColor)
+                        Text("Home").foregroundColor(itemColor)
+                        
                     }
                 })
+                Spacer()
                 Spacer()
                 Button(action: {
                     selectedTap = 1
                 }, label: {
                     VStack {
-                        Image(systemName: "magnifyingglass")
-                        if selectedTap == 1 {
-                            Text("Search")
-                        }
+                        var itemColor : Color = (selectedTap == 1) ? Color.white : Color.gray
+                        
+                        Image(systemName: "magnifyingglass").tint(itemColor)
+                        Text("Search").foregroundColor(itemColor)
                         
                     }
                 })
+                Spacer()
                 Spacer()
                 Button(action: {
                     selectedTap = 2
                 }, label: {
                     VStack {
-                        Image(systemName: "person.fill")
-                        if selectedTap == 2 {
-                            Text("Profile")
-                        }
+                        var itemColor : Color = (selectedTap == 2) ? Color.white : Color.gray
+                        
+                        Image(systemName: "person.fill").tint(itemColor)
+                        Text("Profile").foregroundColor(itemColor)
+                        
                     }
                 })
                 Spacer()
             }
             .padding()
-            .background(Color(UIColor.systemGray6))
+            .background(Color(UIColor.black))
+            .cornerRadius(10.0)
+            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+            
+            .shadow(radius: 10)
+            .onAppear{
+            }
+//            .background(Color(UIColor.systemGray6))
+//            .cornerRadius(10.0)
             
             
             

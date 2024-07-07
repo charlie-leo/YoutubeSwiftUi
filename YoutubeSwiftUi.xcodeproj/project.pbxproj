@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D178D2C37455A000FB19A /* HomeView.swift */; };
 		FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */; };
 		FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2D2C236798006A3BD8 /* ContentView.swift */; };
 		FFD3BA302C23679A006A3BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF4D178D2C37455A000FB19A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FFD3BA282C236798006A3BD8 /* YoutubeSwiftUi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeSwiftUi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSwiftUiApp.swift; sourceTree = "<group>"; };
 		FFD3BA2D2C236798006A3BD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				FFD3BA2D2C236798006A3BD8 /* ContentView.swift */,
 				FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */,
 				FFD3BA312C23679A006A3BD8 /* Preview Content */,
+				FF4D178D2C37455A000FB19A /* HomeView.swift */,
 			);
 			path = YoutubeSwiftUi;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */,
 				FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */,
 				FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */,
 			);
@@ -197,7 +201,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -275,6 +279,8 @@
 				DEVELOPMENT_TEAM = WUSF8D4X93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -305,6 +311,8 @@
 				DEVELOPMENT_TEAM = WUSF8D4X93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
