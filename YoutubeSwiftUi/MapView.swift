@@ -8,13 +8,26 @@
 import SwiftUI
 import MapKit
 
+struct IdentifiableLocation: Identifiable {
+    var id = UUID()
+    let coordinate: CLLocationCoordinate2D
+    
+    init(id: UUID = UUID(), mcoordinate: CLLocationCoordinate2D) {
+        self.id = id
+        self.coordinate = mcoordinate
+    }
+}
 
 struct MapView: View {
     
-    @State private var sregion = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 34.011_284, longitude: -116.166_860),
-            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-        )
+    @StateObject private var locationManager = LocationManager()
+    
+    @State private var annotations = [IdentifiableLocation]()
+    
+    //    @State private var sregion = MKCoordinateRegion(
+    //            center: CLLocationCoordinate2D(latitude: 34.011_284, longitude: -116.166_860),
+    //            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+    //        )
     
     var body: some View {
         
@@ -22,18 +35,36 @@ struct MapView: View {
             VStack{
                 VStack{
                     if #available(iOS 17.0, *) {
-                        Map(initialPosition: .region(region))
+                        Map(initialPosition: .region(locationManager.region))
                     } else {
-                        Map(coordinateRegion: $sregion)
+                        
+                        Map(coordinateRegion: $locationManager.region, showsUserLocation: true, annotationItems: annotations)
+                        { item in
+                            MapMarker(coordinate: item.coordinate , tint: .red)
+                        }
+                        .onAppear {
+                            if let userLocation = locationManager.userLocation {
+                                
+                                let identifiableLocation = IdentifiableLocation(mcoordinate: userLocation)
+                                
+//                                let newAnnotation = MKPointAnnotation()
+//                                newAnnotation.coordinate = userLocation
+                                
+                                annotations.append(identifiableLocation)
+                            }
+                        }
+                        
                     }
                 }
                 .frame(height: reader.size.height/2)
+            
+                
                 Image("")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 200)
                     .clipShape(Circle())
-                    .overlay( 
+                    .overlay(
                         Circle().stroke(Color.white, lineWidth: 4)
                     )
                     .shadow(radius: 25)
@@ -42,7 +73,7 @@ struct MapView: View {
                 
                 VStack(alignment: .leading) {
                     HStack{
-                        Text("Turtle Rock")
+                        Text(locationManager.userAddress ?? "")
                             .font(.title)
                         Spacer()
                     }
@@ -65,21 +96,21 @@ struct MapView: View {
                 }
                 .padding()
             }
-        
+            
         }
         
-       
-    }
-    
-    
-    private var region : MKCoordinateRegion {
-        MKCoordinateRegion(
         
-            center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
-            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-        )
-            
     }
+    
+    
+    //    private var region : MKCoordinateRegion {
+    //        MKCoordinateRegion(
+    //
+    //            center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
+    //            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+    //        )
+    //
+    //    }
     
 }
 

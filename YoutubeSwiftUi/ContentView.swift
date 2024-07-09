@@ -20,18 +20,9 @@ struct ContentView: View {
                 
                 HomeView()
                     .tag(0)
-//                    .tabItem {
-//                        
-//                    }
-                VStack{
-                    Text("Search")
-                        .font(.largeTitle)
-                        .foregroundColor(.cyan)
-                }
+                
+                MapView()
                 .tag(1)
-//                .tabItem {
-//                    
-//                }
                 
                 VStack{
                     Text("Profile")
@@ -39,16 +30,8 @@ struct ContentView: View {
                         .foregroundColor(.accentColor)
                 }
                 .tag(2)
-//                .tabItem {
-//                    
-//                }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-//            .onChange(of: selectedTab) { _ in
-//                withAnimation {
-//                    
-//                }
-//            }
             
             HStack {
                 
@@ -69,11 +52,6 @@ struct ContentView: View {
             .shadow(radius: 10)
             .onAppear{
             }
-//            .onChange(of: selectedTab){ _ in
-//                withAnimation(.spring){
-//                    
-//                }
-//            }
             
         }
     }

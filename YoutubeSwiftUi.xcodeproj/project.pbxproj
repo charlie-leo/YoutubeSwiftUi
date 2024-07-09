@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FF1176E82C3DB7160067C834 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1176E72C3DB7160067C834 /* MapView.swift */; };
+		FF1176EA2C3DBE700067C834 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1176E92C3DBE700067C834 /* LocationManager.swift */; };
 		FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D178D2C37455A000FB19A /* HomeView.swift */; };
 		FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */; };
 		FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2D2C236798006A3BD8 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		FF1176E72C3DB7160067C834 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FF1176E92C3DBE700067C834 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF4D178D2C37455A000FB19A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FFD3BA282C236798006A3BD8 /* YoutubeSwiftUi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeSwiftUi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSwiftUiApp.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				FFD3BA312C23679A006A3BD8 /* Preview Content */,
 				FF4D178D2C37455A000FB19A /* HomeView.swift */,
 				FF1176E72C3DB7160067C834 /* MapView.swift */,
+				FF1176E92C3DBE700067C834 /* LocationManager.swift */,
 			);
 			path = YoutubeSwiftUi;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */,
 				FF1176E82C3DB7160067C834 /* MapView.swift in Sources */,
+				FF1176EA2C3DBE700067C834 /* LocationManager.swift in Sources */,
 				FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */,
 				FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */,
 			);
@@ -285,6 +289,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to show it on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,6 +323,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to show it on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
