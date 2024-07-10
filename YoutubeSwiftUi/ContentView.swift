@@ -19,14 +19,9 @@ struct ContentView: View {
                 
                 HomeView()
                 .tag(0)
-            
+
                 
-                
-                VStack{
-                    Text("Search")
-                    .font(.largeTitle)
-                    .foregroundColor(.cyan)
-                }
+                MapView()
                 .tag(1)
                 
                 
@@ -47,7 +42,7 @@ struct ContentView: View {
                 TabCustomItem("Home", tab: 0, icon: "house.fill")
                 Spacer()
                 Spacer()
-                TabCustomItem("Search", tab: 1, icon: "magnifyingglass")
+                TabCustomItem("Map", tab: 1, icon: "magnifyingglass")
                 Spacer()
                 Spacer()
                 TabCustomItem("Profile", tab: 2, icon: "person.fill")
