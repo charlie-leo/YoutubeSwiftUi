@@ -39,7 +39,7 @@ struct ContentView: View {
                 TabCustomItem("Home", tab: 0, icon: "house.fill")
                 Spacer()
                 Spacer()
-                TabCustomItem("Search", tab: 1, icon: "magnifyingglass")
+                TabCustomItem("Map", tab: 1, icon: "map.fill")
                 Spacer()
                 Spacer()
                 TabCustomItem("Profile", tab: 2, icon: "person.fill")

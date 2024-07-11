@@ -11,87 +11,123 @@ import MapKit
 struct IdentifiableLocation: Identifiable {
     var id = UUID()
     let coordinate: CLLocationCoordinate2D
+    let isCurrentLocation: Bool
     
-    init(id: UUID = UUID(), mcoordinate: CLLocationCoordinate2D) {
+    init(id: UUID = UUID(), coordinate: CLLocationCoordinate2D, isCurrentLocation: Bool) {
         self.id = id
-        self.coordinate = mcoordinate
+        self.coordinate = coordinate
+        self.isCurrentLocation = isCurrentLocation
     }
+    
 }
 
 struct MapView: View {
     
     @StateObject private var locationManager = LocationManager()
-    
     @State private var annotations = [IdentifiableLocation]()
+    @State private var searchText = ""
     
-    //    @State private var sregion = MKCoordinateRegion(
-    //            center: CLLocationCoordinate2D(latitude: 34.011_284, longitude: -116.166_860),
-    //            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    //        )
     
     var body: some View {
         
         GeometryReader { reader in
             VStack{
+                
+                HStack {
+                    TextField("Search Field", text: $searchText, onCommit: {
+                        locationManager.searchLocation(searchQuery: searchText)
+                    })
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    
+                    Button(action: {
+                        locationManager.searchLocation(searchQuery: searchText)
+                    }, label: {
+                        Image(systemName: "magnifyingglass")
+                            .padding()
+                            .background(
+                                Circle().foregroundColor(Color.gray.opacity(0.3))
+                            )
+                    })
+                }
+                
                 VStack{
                     if #available(iOS 17.0, *) {
                         Map(initialPosition: .region(locationManager.region))
                     } else {
                         
-                        Map(coordinateRegion: $locationManager.region, showsUserLocation: true, annotationItems: annotations)
-                        { item in
-                            MapMarker(coordinate: item.coordinate , tint: .red)
-                        }
-                        .onAppear {
-                            if let userLocation = locationManager.userLocation {
-                                
-                                let identifiableLocation = IdentifiableLocation(mcoordinate: userLocation)
-                                
-//                                let newAnnotation = MKPointAnnotation()
-//                                newAnnotation.coordinate = userLocation
-                                
-                                annotations.append(identifiableLocation)
-                            }
-                        }
+                        RouteMapView(locationManager: locationManager)
+                        
+//                        Map(coordinateRegion: $locationManager.region, showsUserLocation: true, annotationItems: createAnnotaions())
+//                        { item in
+//                            MapMarker(coordinate: item.coordinate , tint: item.isCurrentLocation ? .blue : .red)
+//                        }
+//                        .overlay {
+//                            if let route = locationManager.route {
+//                                MapPolyline(coordinates: route.polyline.coordinates, count: route.polyline.pointCount)
+//                                    .stroke(Color.blue, lineWidth: 4)
+//                            }
+//                        }
+                        
                         
                     }
                 }
-                .frame(height: reader.size.height/2)
-            
-                
-                Image("")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle().stroke(Color.white, lineWidth: 4)
-                    )
-                    .shadow(radius: 25)
-                    .offset(x: 0, y: -120)
-                    .padding(.bottom, -120)
                 
                 VStack(alignment: .leading) {
+                    if let route = locationManager.route {
+                                   Text("Distance: \(route.distance / 1000, specifier: "%.2f") km")
+                                   Text("Estimated Time: \(route.expectedTravelTime / 60, specifier: "%.0f") minutes")
+                               }
+                    HStack{
+                        Image(systemName: "location.circle.fill")
+                        Text("Address")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 2)
+                    
                     HStack{
                         Text(locationManager.userAddress ?? "")
                             .font(.title)
                         Spacer()
                     }
-                    HStack{
-                        Text("Joshua Tree National pare")
-                            .font(.subheadline)
-                        Spacer()
-                        Text("California")
-                            .font(.subheadline)
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 10)
                     
-                    Divider()
-                    Text("About Turtle Rock")
-                        .font(.title2)
-                    Text("Description Text gose here.")
+                    if let searchAddress = locationManager.searchAddress{
+                        
+                        HStack{
+                            Image(systemName: "location.fill")
+                            Text("Search Address")
+                                .font(.subheadline)
+                            Spacer()
+                        }
                         .foregroundStyle(.secondary)
+                        .padding(.bottom, 2)
+                        
+                        HStack{
+                            Text(searchAddress)
+                                .font(.title)
+                            Spacer()
+                        }
+                        .padding(.bottom, 10)
+                    }
+                    //                    HStack{
+                    //                        Text("Joshua Tree National pare")
+                    //                            .font(.subheadline)
+                    //                        Spacer()
+                    //                        Text("California")
+                    //                            .font(.subheadline)
+                    //                    }
+                    //                    .font(.subheadline)
+                    //                    .foregroundStyle(.secondary)
+                    ////
+                    //                    Divider()
+                    //                    Text("About Turtle Rock")
+                    //                        .font(.title2)
+                    //                    Text("Description Text gose here.")
+                    //                        .foregroundStyle(.secondary)
                     
                 }
                 .padding()
@@ -102,18 +138,31 @@ struct MapView: View {
         
     }
     
+    private func createAnnotaions() -> [IdentifiableLocation] {
+        var annotations = [IdentifiableLocation]()
+        
+        if let userLocation = locationManager.userLocation {
+            annotations.append(IdentifiableLocation(coordinate: userLocation, isCurrentLocation: true))
+        }
+        if let searchLocation = locationManager.searchLocation {
+            annotations.append(IdentifiableLocation(coordinate: searchLocation, isCurrentLocation: false))
+        }
+        
+        return annotations
+        
+    }
     
-    //    private var region : MKCoordinateRegion {
-    //        MKCoordinateRegion(
-    //
-    //            center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
-    //            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    //        )
-    //
-    //    }
-    
+}
+
+extension MKPolyline {
+    var coordinates: [CLLocationCoordinate2D] {
+        var coords = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
+        getCoordinates(&coords, range: NSRange(location: 0, length: pointCount))
+        return coords
+    }
 }
 
 #Preview {
     MapView()
 }
+
