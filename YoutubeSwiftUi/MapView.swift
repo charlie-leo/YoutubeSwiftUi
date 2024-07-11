@@ -27,6 +27,7 @@ struct MapView: View {
     @State private var annotations = [IdentifiableLocation]()
     @State private var searchText = ""
     
+    @State private var isSearchViewPresent = false
     
     var body: some View {
         
@@ -35,14 +36,18 @@ struct MapView: View {
                 
                 HStack {
                     TextField("Search Field", text: $searchText, onCommit: {
-                        locationManager.searchLocation(searchQuery: searchText)
+//                        locationManager.searchLocation(searchQuery: searchText)
                     })
+                    .disabled(true)
+                    .onTapGesture {
+                    }
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     
                     Button(action: {
-                        locationManager.searchLocation(searchQuery: searchText)
+                        isSearchViewPresent.toggle()
+//                        locationManager.searchLocation(searchQuery: searchText)
                     }, label: {
                         Image(systemName: "magnifyingglass")
                             .padding()
@@ -50,6 +55,9 @@ struct MapView: View {
                                 Circle().foregroundColor(Color.gray.opacity(0.3))
                             )
                     })
+                }
+                .onTapGesture {
+                    isSearchViewPresent.toggle()
                 }
                 
                 VStack{
@@ -131,6 +139,9 @@ struct MapView: View {
                     
                 }
                 .padding()
+                .sheet(isPresented: $isSearchViewPresent){
+                    SearchView(locationManager: locationManager)
+                }
             }
             
         }

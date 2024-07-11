@@ -21,6 +21,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation : CLLocationCoordinate2D?
     @Published var route : MKRoute?
     
+//    @Published var locationList = [MKMapItem]()
+    @Published var locationList = [LocationDetails]()
+    
     private var geocoder = CLGeocoder()
     @Published var userAddress: String?
     @Published var searchAddress: String?
@@ -56,35 +59,73 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         let search = MKLocalSearch(request: searchRequest)
         search.start { response, error in
-            guard let response = response, let item = response.mapItems.first else {
+//            guard let response = response, 
+//                    let item = response.mapItems.first else {
+//                return
+//            }
+            guard let response = response else {
                 return
             }
             
-            let coordinate = item.placemark.coordinate
-            self.searchLocation = coordinate
-            self.region = MKCoordinateRegion(center: coordinate, span: self.mapSpan)
-            
-            self.calculateRoute()
-            
-            if let locaiton = item.placemark.location {
-                self.getLocationAddress(coordinate: locaiton){ addressString in
-                    self.searchAddress = addressString
+            self.locationList.removeAll()
+            response.mapItems.forEach { item in
+                var address = ""
+                var routeItem : MKRoute = MKRoute()
+                
+                if let locaiton = item.placemark.location {
+                    self.getLocationAddress(coordinate: locaiton){ addressString in
+                        
+                        address = addressString
+                        
+                        let coordinate = item.placemark.coordinate
+                        self.calculateRoute(destnation: coordinate){ route in
+                            routeItem = route
+                            
+                            let distance = String(format: "%.2f km", routeItem.distance / 1000)
+                            let duration = String(format: "%.0f minutes", routeItem.expectedTravelTime / 60)
+                            
+                            let locationDetails = LocationDetails( coordinate: coordinate, address: address, distance: distance, duration: duration, route: route)
+                            
+                            self.locationList.append(locationDetails)
+                            print(self.locationList.count)
+                            
+                        }
+                        
+                    }
                 }
+                
             }
             
+//            let coordinate = item.placemark.coordinate
+//            self.searchLocation = coordinate
+//            self.region = MKCoordinateRegion(center: coordinate, span: self.mapSpan)
+//            
+//            self.calculateRoute(destnation: coordinate){ route in
+//                self.route = route
+//            }
+//            
+//            if let locaiton = item.placemark.location {
+//                self.getLocationAddress(coordinate: locaiton){ addressString in
+//                    self.searchAddress = addressString
+//                }
+//            }
         }
-        
-        
+    }
+    
+    func selectedLocation(selectedLocation : LocationDetails){
+        self.searchLocation = selectedLocation.coordinate
+        self.route = selectedLocation.route
     }
     
     
-    func calculateRoute() {
-        guard let userLocation = self.userLocation, let searchLocation = self.searchLocation else {
+    func calculateRoute(destnation : CLLocationCoordinate2D ,callback : @escaping (MKRoute) -> ()) {
+        
+        guard let userLocation = self.userLocation else {
             return
         }
         
         let userPlacemark = MKPlacemark(coordinate: userLocation)
-        let searchPlacemark = MKPlacemark(coordinate: searchLocation)
+        let searchPlacemark = MKPlacemark(coordinate: destnation)
         
         let directionRequest = MKDirections.Request()
         directionRequest.source = MKMapItem(placemark: userPlacemark)
@@ -97,7 +138,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             print("Route not found")
                             return
                         }
-            self.route = route
+            callback(route)
         }
         
         
@@ -138,5 +179,30 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
+    
+}
+
+
+struct LocationDetails : Identifiable {
+    var id: UUID
+    var coordinate : CLLocationCoordinate2D
+    var route : MKRoute
+    var address : String
+    var distance : String
+    var duration : String
+    
+    init(coordinate: CLLocationCoordinate2D, 
+         address: String,
+         distance: String,
+         duration: String,
+         route : MKRoute
+    ) {
+        self.id = UUID()
+        self.coordinate = coordinate
+        self.address = address
+        self.distance = distance
+        self.duration = duration
+        self.route = route
+    }
     
 }
