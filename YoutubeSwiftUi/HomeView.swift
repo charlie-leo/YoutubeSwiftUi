@@ -9,94 +9,93 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var firstName : String = ""
-    @State private var lastName : String = ""
-    @State private var email : String = ""
-    @State private var password : String = ""
-    @State private var confirmPassword : String = ""
-    @State private var age : String = ""
-    @State private var showAlert : Bool = false
     
-    
-    let ageRange = Array(18...100)
+    @State private var currentIndex = 0
+    let bannerImages = [
+        "banner_1",
+        "banner_2",
+        "banner_3"
+    ]
     
     var body: some View {
         
-        NavigationView{
-         
-            Form{
-                
-                Section(header: Text("User Details")) {
-                    
-                    TextField("First Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    
-                }
-                
-                Section(header : Text("Account Information")){
-                    TextField("Email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                    SecureField("Password", text: $password)
-                    SecureField("Confirm Password", text: $confirmPassword)
-                }
-                
-                Section (header: Text("Personal Details")){
-                    Picker("Select Age", selection: $age){
-                        ForEach(ageRange, id: \.self){
-                            Text("\($0)").tag($0)
-                        }
-                    }
-                }
-                
-                Section {
-                    Button(action: submitForm){
-                        Text("Submit")
-                            .frame(maxWidth: .infinity,alignment: .center)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10.0)
-                    }
-                    .alert(isPresented: $showAlert, content: {
-                        Alert(title: Text("Invalid Input"), message: Text(validationMessage), dismissButton: .default(Text("OK")))
-                    })
-                }
-                
-                
-            }
-            
-        }.navigationTitle("Home")
-            .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    
-    private var validationMessage : String {
-        if firstName.isEmpty {return "First name is required."}
-        if lastName.isEmpty {return "Last name is required."}
-        if email.isEmpty {return "Email name is required."}
-        if password.isEmpty {return "Password name is required."}
-        if password != confirmPassword {return "Password do not match."}
-        return ""
-    }
-    
-    private func submitForm(){
-        if validationMessage.isEmpty {
-            
-        } else  {
-            showAlert = true
+        VStack {
+            BannerView(bannerImages: bannerImages, currentIndex: $currentIndex)
+            BannerIndicatorView(bannercount: bannerImages.count, currentIndex: $currentIndex)
         }
     }
     
+}
+
+struct BannerView : View {
     
+    let bannerImages : [String]
+    @Binding var currentIndex : Int
+    var body : some View {
+        
+        TabView (selection: $currentIndex) {
+            
+            ForEach(0..<bannerImages.count) { index in
+                @State var offset = 0.0
+                Image(bannerImages[index])
+                    .resizable()
+                    .cornerRadius(10)
+                    .padding(20)
+                    .frame(height: 400)
+                    .scaledToFit()
+                    .tag(index)
+                    .offset(x: offset)
+                    .onAppear{
+                        withAnimation(.easeIn){
+                            offset = 100.0
+                        }
+                    }
+                    .onDisappear{
+                        withAnimation(.easeIn){
+                            offset = -100.0
+                        }
+                    }
+            }
+            
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        .onAppear{
+            autoScroll()
+        }
+    }
+    
+    func autoScroll() {
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { timer in
+            withAnimation(.easeIn){
+                currentIndex = (currentIndex + 1) % bannerImages.count
+            }
+        }
+    }
     
 }
 
-//#Preview {
-//    HomeView()
-//}
-
-
+struct BannerIndicatorView : View {
+    let bannercount : Int
+    @Binding var currentIndex : Int
+    @Namespace private var animationNamespace
+    var body: some View {
+        HStack (spacing: 8) {
+            ForEach(0..<bannercount) { index in
+                if index == currentIndex {
+                    Circle()
+                        .fill(Color.blue)
+                        .frame(width: 10, height: 10)
+                        .matchedGeometryEffect(id: "background", in: animationNamespace)
+                } else {
+                    Circle()
+                        .fill( Color.gray)
+                        .frame(width: 10, height: 10)
+                }
+            }
+        }
+    }
+    
+}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

@@ -16,6 +16,8 @@
 		FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2D2C236798006A3BD8 /* ContentView.swift */; };
 		FFD3BA302C23679A006A3BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */; };
 		FFD3BA332C23679A006A3BD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFD3BA322C23679A006A3BD8 /* Preview Assets.xcassets */; };
+		FFE8C2242C499BB50047D32F /* MyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8C2232C499BB50047D32F /* MyWidget.swift */; };
+		FFE8C2262C499E510047D32F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8C2252C499E510047D32F /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		FFD3BA2D2C236798006A3BD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFD3BA322C23679A006A3BD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FFE8C2232C499BB50047D32F /* MyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidget.swift; sourceTree = "<group>"; };
+		FFE8C2252C499E510047D32F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 		FFD3BA2A2C236798006A3BD8 /* YoutubeSwiftUi */ = {
 			isa = PBXGroup;
 			children = (
+				FFE8C2222C499B490047D32F /* Widget */,
 				FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */,
 				FFD3BA2D2C236798006A3BD8 /* ContentView.swift */,
 				FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */,
@@ -70,6 +75,7 @@
 				FF1176E92C3DBE700067C834 /* LocationManager.swift */,
 				FF8CBE0A2C40507A007CD054 /* RouteMapView.swift */,
 				FF8CBE0C2C4055C9007CD054 /* SearchView.swift */,
+				FFE8C2252C499E510047D32F /* ProfileView.swift */,
 			);
 			path = YoutubeSwiftUi;
 			sourceTree = "<group>";
@@ -80,6 +86,14 @@
 				FFD3BA322C23679A006A3BD8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FFE8C2222C499B490047D32F /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				FFE8C2232C499BB50047D32F /* MyWidget.swift */,
+			);
+			path = Widget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,8 +167,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */,
+				FFE8C2262C499E510047D32F /* ProfileView.swift in Sources */,
 				FF1176E82C3DB7160067C834 /* MapView.swift in Sources */,
 				FF1176EA2C3DBE700067C834 /* LocationManager.swift in Sources */,
+				FFE8C2242C499BB50047D32F /* MyWidget.swift in Sources */,
 				FF8CBE0D2C4055C9007CD054 /* SearchView.swift in Sources */,
 				FF8CBE0B2C40507A007CD054 /* RouteMapView.swift in Sources */,
 				FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */,
