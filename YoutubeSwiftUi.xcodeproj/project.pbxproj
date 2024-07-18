@@ -14,6 +14,7 @@
 		FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2D2C236798006A3BD8 /* ContentView.swift */; };
 		FFD3BA302C23679A006A3BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */; };
 		FFD3BA332C23679A006A3BD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFD3BA322C23679A006A3BD8 /* Preview Assets.xcassets */; };
+		FFE8C2282C49A8BE0047D32F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8C2272C49A8BE0047D32F /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		FFD3BA2D2C236798006A3BD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFD3BA322C23679A006A3BD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FFE8C2272C49A8BE0047D32F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				FF4D178D2C37455A000FB19A /* HomeView.swift */,
 				FF817E492C3E0D8900AFA550 /* MapView.swift */,
 				FF817E4B2C3E0E1700AFA550 /* LocationManager.swift */,
+				FFE8C2272C49A8BE0047D32F /* ProfileView.swift */,
 			);
 			path = YoutubeSwiftUi;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				FF817E4A2C3E0D8900AFA550 /* MapView.swift in Sources */,
 				FF817E4C2C3E0E1700AFA550 /* LocationManager.swift in Sources */,
 				FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */,
+				FFE8C2282C49A8BE0047D32F /* ProfileView.swift in Sources */,
 				FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
