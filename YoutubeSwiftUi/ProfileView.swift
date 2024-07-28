@@ -18,14 +18,49 @@ struct ProfileView: View {
     @State private var age : String = ""
     @State private var showAlert : Bool = false
     
+//    var configuration = PHPicker
+    
+    @State private var showImagePicker = false
+    @State private var image: UIImage?
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+
     
     let ageRange = Array(18...100)
     
     var body: some View {
         
         NavigationView{
-         
+            VStack {
+                      if let uiImage = image {
+                          Image(uiImage: uiImage)
+                              .resizable()
+                              .scaledToFit()
+                              .frame(width: 300, height: 300)
+                      } else {
+                          Text("Select an image")
+                              .font(.title)
+                              .foregroundColor(.gray)
+                      }
+
+                      HStack {
+                          Button("Choose from Library") {
+                              sourceType = .photoLibrary
+                              showImagePicker.toggle()
+                          }
+                          .padding()
+
+                          Button("Take Photo") {
+                              sourceType = .camera
+                              showImagePicker.toggle()
+                          }
+                          .padding()
+                          .disabled(!UIImagePickerController.isSourceTypeAvailable(.camera))
+                      }
+                  }
             Form{
+                
+              
+                
                 
                 Section(header: Text("User Details")) {
                     
@@ -69,6 +104,10 @@ struct ProfileView: View {
             
         }.navigationTitle("Home")
             .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $image, sourceType: sourceType)
+            }
+
     }
     
     

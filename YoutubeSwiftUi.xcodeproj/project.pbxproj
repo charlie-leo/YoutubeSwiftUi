@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D178D2C37455A000FB19A /* HomeView.swift */; };
+		FF58535F2C56A02700FB95B9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF58535E2C56A02700FB95B9 /* ImagePicker.swift */; };
 		FF817E4A2C3E0D8900AFA550 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF817E492C3E0D8900AFA550 /* MapView.swift */; };
 		FF817E4C2C3E0E1700AFA550 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF817E4B2C3E0E1700AFA550 /* LocationManager.swift */; };
 		FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		FF4D178D2C37455A000FB19A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FF58535E2C56A02700FB95B9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FF817E492C3E0D8900AFA550 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		FF817E4B2C3E0E1700AFA550 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FFD3BA282C236798006A3BD8 /* YoutubeSwiftUi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeSwiftUi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF58535D2C569F5100FB95B9 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				FF58535E2C56A02700FB95B9 /* ImagePicker.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		FFD3BA1F2C236798006A3BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 		FFD3BA2A2C236798006A3BD8 /* YoutubeSwiftUi */ = {
 			isa = PBXGroup;
 			children = (
+				FF58535D2C569F5100FB95B9 /* Elements */,
 				FFD3BA2B2C236798006A3BD8 /* YoutubeSwiftUiApp.swift */,
 				FFD3BA2D2C236798006A3BD8 /* ContentView.swift */,
 				FFD3BA2F2C23679A006A3BD8 /* Assets.xcassets */,
@@ -152,6 +163,7 @@
 				FF4D178E2C37455A000FB19A /* HomeView.swift in Sources */,
 				FF817E4A2C3E0D8900AFA550 /* MapView.swift in Sources */,
 				FF817E4C2C3E0E1700AFA550 /* LocationManager.swift in Sources */,
+				FF58535F2C56A02700FB95B9 /* ImagePicker.swift in Sources */,
 				FFD3BA2E2C236798006A3BD8 /* ContentView.swift in Sources */,
 				FFE8C2282C49A8BE0047D32F /* ProfileView.swift in Sources */,
 				FFD3BA2C2C236798006A3BD8 /* YoutubeSwiftUiApp.swift in Sources */,
@@ -293,9 +305,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide better services.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide better services even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide better services.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to select photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -328,9 +342,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app requires access to Bluetooth to connect to peripherals.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app needs to communicate with Bluetooth devices.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide better services.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to provide better services even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide better services.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to select photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

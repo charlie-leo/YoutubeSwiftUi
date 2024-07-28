@@ -25,11 +25,12 @@ struct ContentView: View {
                 .tag(1)
                 
                 
-                VStack{
-                    Text("Profile")
-                    .font(.largeTitle)
-                    .foregroundColor(.accentColor)
-                }
+//                VStack{
+//                    Text("Profile")
+//                    .font(.largeTitle)
+//                    .foregroundColor(.accentColor)
+//                }
+                ProfileView()
                 .tag(2)
                
                 
