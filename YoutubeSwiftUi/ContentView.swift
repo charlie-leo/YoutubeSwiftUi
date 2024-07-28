@@ -27,14 +27,7 @@ struct ContentView: View {
                 MapView()
                     .tag(1)
                 
-                VStack{
-                    Text("Profile")
-                        .font(.largeTitle)
-                        .foregroundColor(.accentColor)
-                        .onTapGesture {
-                            isProfileSheetPresent.toggle()
-                        }
-                }
+               ProfileView()
                 .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

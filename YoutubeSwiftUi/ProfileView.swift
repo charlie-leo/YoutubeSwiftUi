@@ -19,13 +19,44 @@ struct ProfileView: View {
     
     let ageRange = Array(18...100)
     
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.isPresented) var isPresent
+//    @Environment(\.dismiss) var dismiss
+//    @Environment(\.isPresented) var isPresent
+    
+    @State private var showImagePicker = false
+    @State private var image: UIImage?
+    @State private var sourceType : UIImagePickerController.SourceType = .photoLibrary
+    
     
     var body: some View {
         
         NavigationView{
          
+            VStack {
+                if let uiImage = image {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                } else  {
+                    Text("Select an image")
+                }
+                
+                HStack{
+                    Button("Choose from library"){
+                        sourceType = .photoLibrary
+                        showImagePicker.toggle()
+                    }
+                    Button("Take photo"){
+                        sourceType = .camera
+                        showImagePicker.toggle()
+                    }
+                        
+                }
+                
+                
+            }
+            
+            
             Form{
                 
                 Section(header: Text("User Details")) {
@@ -70,6 +101,9 @@ struct ProfileView: View {
             
         }.navigationTitle("Home")
             .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $image, sourceType: sourceType)
+            }
     }
     
     
@@ -83,7 +117,7 @@ struct ProfileView: View {
     }
     
     private func submitForm(){
-        dismiss()
+//        dismiss()
         
 //        if validationMessage.isEmpty {
 //            
@@ -98,5 +132,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ContentView()
+    ProfileView()
 }
