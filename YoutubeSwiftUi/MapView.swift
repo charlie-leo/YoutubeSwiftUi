@@ -44,7 +44,6 @@ struct MapView: View {
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    
                     Button(action: {
                         isSearchViewPresent.toggle()
 //                        locationManager.searchLocation(searchQuery: searchText)

@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     
     @State private var selectedTab = 0
     @Namespace private var animationNamespace
     
+    @State private var isProfileSheetPresent = false
     
+   
     var body: some View {
         
         VStack {
@@ -22,12 +25,15 @@ struct ContentView: View {
                     .tag(0)
                 
                 MapView()
-                .tag(1)
+                    .tag(1)
                 
                 VStack{
                     Text("Profile")
                         .font(.largeTitle)
                         .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            isProfileSheetPresent.toggle()
+                        }
                 }
                 .tag(2)
             }
@@ -53,6 +59,18 @@ struct ContentView: View {
             .onAppear{
             }
             
+        }
+        .sheet(isPresented: $isProfileSheetPresent){
+            if #available(iOS 16.4, *) {
+                ProfileView()
+                    .presentationDetents([.medium, .large, .fraction(0.25)])
+                    .presentationCornerRadius(20)
+                    .presentationDragIndicator(.visible)
+                    .presentationBackground(Color(.systemGray))
+//                    .prese
+            } else {
+                ProfileView()
+            }
         }
     }
     
@@ -85,7 +103,7 @@ struct ContentView: View {
 
 
 
-
+@available(iOS 16.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

@@ -17,8 +17,10 @@ struct ProfileView: View {
     @State private var age : String = ""
     @State private var showAlert : Bool = false
     
-    
     let ageRange = Array(18...100)
+    
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.isPresented) var isPresent
     
     var body: some View {
         
@@ -81,11 +83,13 @@ struct ProfileView: View {
     }
     
     private func submitForm(){
-        if validationMessage.isEmpty {
-            
-        } else  {
-            showAlert = true
-        }
+        dismiss()
+        
+//        if validationMessage.isEmpty {
+//            
+//        } else  {
+//            showAlert = true
+//        }
     }
     
     
@@ -94,5 +98,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ContentView()
 }
